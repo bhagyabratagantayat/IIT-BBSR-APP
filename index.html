@@ -1,106 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechZephyr - LiveStockClassify</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IIT BBSR App — TechZephyr Round 1</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">TechZephyr App</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <button id="darkModeToggle">🌙</button>
+  <!-- PRELOADER -->
+  <div id="preloader" aria-hidden="false">
+    <div class="loader">
+      <svg viewBox="0 0 100 100" width="80" height="80" aria-hidden="true">
+        <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div class="loader-text">Loading…</div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar" role="banner">
+    <div class="container nav-inner">
+      <a class="logo" href="#hero">IIT-BBSR</a>
+
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        ☰
+      </button>
+
+      <nav id="primaryNav" class="nav" role="navigation" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="controls">
+        <button id="darkModeToggle" aria-pressed="false" title="Toggle dark mode">🌙</button>
+      </div>
+    </div>
   </header>
 
-  <!-- Hero Section -->
-  <section id="hero" class="hero">
-    <video autoplay muted loop id="heroVideo">
-      <source src="assets/banner.mp4" type="video/mp4">
+  <!-- HERO (video background + parallax text) -->
+  <section id="hero" class="hero" aria-labelledby="hero-title">
+    <video id="heroVideo" class="hero-video" autoplay muted loop playsinline>
+      <source src="assets/banner.mp4" type="video/mp4" />
     </video>
-    <div class="hero-content">
-      <h1>Share Quality Time. And Space.</h1>
-      <p>Experience innovation with TechZephyr App.</p>
-      <a href="#pricing" class="btn">Start Free Trial</a>
-    </div>
-  </section>
 
-  <!-- Features Section -->
-  <section id="features" class="features">
-    <h2>Our Features</h2>
-    <div class="tabs">
-      <button class="tab active" data-tab="billing">Billing</button>
-      <button class="tab" data-tab="charging">Charging</button>
-      <button class="tab" data-tab="catalog">Catalog</button>
-      <button class="tab" data-tab="events">Events</button>
-    </div>
-    <div class="tab-content">
-      <p id="tabText">Billing details will appear here...</p>
-    </div>
-  </section>
+    <div class="container hero-content">
+      <h1 id="hero-title" class="parallax" data-speed="0.6">Share quality time. And space.</h1>
+      <p class="lead parallax" data-speed="0.8">Experience the replication challenge — pixel-perfect design with subtle innovation.</p>
+      <div class="hero-cta parallax" data-speed="1.0">
+        <a class="btn" href="#pricing">Start 14-day free trial</a>
+        <a class="btn ghost" href="#features">See features</a>
+      </div>
 
-  <!-- Pricing Section -->
-  <section id="pricing" class="pricing">
-    <h2>Pricing Plans</h2>
-    <label>
-      <input type="checkbox" id="priceToggle"> Bill Annually
-    </label>
-    <div class="pricing-cards">
-      <div class="card">
-        <h3>Growth</h3>
-        <p class="price">$29 / mo</p>
-        <button>Add to Bag</button>
-      </div>
-      <div class="card popular">
-        <h3>Pro <span class="badge">Most Popular</span></h3>
-        <p class="price">$59 / mo</p>
-        <button>Add to Bag</button>
-      </div>
-      <div class="card">
-        <h3>Enterprise</h3>
-        <p class="price">$99 / mo</p>
-        <button>Add to Bag</button>
+      <div class="widgets" aria-hidden="true">
+        <!-- small circular widgets placeholder -->
+        <div class="widget w1">4.8<span>★</span></div>
+        <div class="widget w2">Xero</div>
+        <div class="widget w3">Capterra</div>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section id="testimonials" class="testimonials">
-    <h2>Happy Sellers</h2>
-    <div class="carousel">
-      <div class="testimonial active">"Amazing app!" - Amzigo (UK)</div>
-      <div class="testimonial">"Simplifies my work!" - Xero (IN)</div>
-      <div class="testimonial">"Highly recommended!" - Capterra (US)</div>
+  <!-- FEATURES (tabs) -->
+  <section id="features" class="features container" aria-labelledby="features-title">
+    <h2 id="features-title">Our Features</h2>
+
+    <div class="tabs" role="tablist" aria-label="Feature categories">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="billing">Billing</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="charging">Charging</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="catalog">Catalog</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="events">Events</button>
+    </div>
+
+    <div class="tab-panel" id="tabPanel" role="tabpanel">
+      <div id="tabContent" class="tab-content">
+        <p><strong>Billing</strong> — replicate the billing UI, with invoices, subtotals and a mini chart (placeholder).</p>
+      </div>
     </div>
   </section>
 
-  <!-- Contact Form -->
-  <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <form id="contactForm">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit">Send</button>
+  <!-- PRICING -->
+  <section id="pricing" class="pricing container" aria-labelledby="pricing-title">
+    <h2 id="pricing-title">Pricing Plans</h2>
+    <div class="price-toggle">
+      <label for="billingCycle">Annually</label>
+      <input id="billingCycle" type="checkbox" aria-label="Toggle annual pricing" />
+      <label for="billingCycle">Monthly</label>
+    </div>
+
+    <div class="pricing-grid" role="list">
+      <article class="card" role="listitem" aria-labelledby="plan-growth">
+        <h3 id="plan-growth">Growth</h3>
+        <p class="price" data-month="$29 / mo" data-year="$299 / yr">$29 / mo</p>
+        <ul class="features-list">
+          <li>Up to 5 users</li>
+          <li>Email support</li>
+        </ul>
+        <button class="btn">Add to Bag</button>
+      </article>
+
+      <article class="card popular" role="listitem" aria-labelledby="plan-pro">
+        <h3 id="plan-pro">Pro <span class="badge">Most Popular</span></h3>
+        <p class="price" data-month="$59 / mo" data-year="$599 / yr">$59 / mo</p>
+        <ul class="features-list">
+          <li>Up to 20 users</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="btn">Add to Bag</button>
+      </article>
+
+      <article class="card" role="listitem" aria-labelledby="plan-enterprise">
+        <h3 id="plan-enterprise">Enterprise</h3>
+        <p class="price" data-month="$99 / mo" data-year="$999 / yr">$99 / mo</p>
+        <ul class="features-list">
+          <li>Unlimited users</li>
+          <li>Dedicated support</li>
+        </ul>
+        <button class="btn">Contact Sales</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS (carousel) -->
+  <section id="testimonials" class="testimonials container" aria-labelledby="testimonials-title">
+    <h2 id="testimonials-title">Happy Sellers</h2>
+    <div class="carousel" aria-live="polite">
+      <blockquote class="testimonial active">"Amazing app!" <cite>— Amzigo, UK</cite></blockquote>
+      <blockquote class="testimonial">"Simplifies my work!" <cite>— Seller X, IN</cite></blockquote>
+      <blockquote class="testimonial">"Highly recommended!" <cite>— Capterra, US</cite></blockquote>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact container" aria-labelledby="contact-title">
+    <h2 id="contact-title">Contact Us</h2>
+    <form id="contactForm" class="contact-form" novalidate>
+      <label>
+        <span class="visually-hidden">Name</span>
+        <input name="name" type="text" placeholder="Your name" required aria-required="true" />
+      </label>
+      <label>
+        <span class="visually-hidden">Email</span>
+        <input name="email" type="email" placeholder="Your email" required aria-required="true" />
+      </label>
+      <label>
+        <span class="visually-hidden">Message</span>
+        <textarea name="message" placeholder="Your message" rows="4" required aria-required="true"></textarea>
+      </label>
+      <button type="submit" class="btn">Send Message</button>
     </form>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 TechZephyr APP- LiveStockClassify. All rights reserved.</p>
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>© 2025 IIT BBSR App. All rights reserved.</p>
+      <p class="muted">Built for TechZephyr ROUND 1 — Replicate & Innovate</p>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
-
