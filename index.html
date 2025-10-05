@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IIT-BBSR App — TechZephyr</title>
 
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/252/252025.png" type="image/png">
+
   <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/9d6f3f9d2e.js" crossorigin="anonymous"></script>
@@ -29,7 +32,9 @@
   <!-- NAVBAR -->
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
-      <a class="brand" href="#hero" id="homeBtn">IIT BBSR</a>
+      <a class="brand" href="#hero" id="homeBtn">
+        <img src="https://cdn-icons-png.flaticon.com/512/252/252025.png" alt="Logo" class="logo"> IIT BBSR
+      </a>
 
       <button id="hamburger" class="nav-toggle" aria-label="Toggle navigation">
         <span class="hamburger"></span>
@@ -84,14 +89,42 @@
   <section id="features" class="features section">
     <div class="container">
       <h2 class="section-title">Our Features</h2>
-      <div class="tabs" role="tablist">
-        <button class="tab active" data-tab="billing">Billing</button>
-        <button class="tab" data-tab="charging">Charging</button>
-        <button class="tab" data-tab="catalog">Catalog</button>
-        <button class="tab" data-tab="events">Events</button>
-      </div>
-      <div class="tab-panel" id="tabPanel">
-        <p id="tabText">Billing details will appear here. Replace with actual content.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-bolt feature-icon"></i>
+          <h4>Fast Performance</h4>
+          <p>Optimized for speed and efficiency.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-shield-alt feature-icon"></i>
+          <h4>Secure</h4>
+          <p>Top-level security for your data.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-cloud feature-icon"></i>
+          <h4>Cloud Sync</h4>
+          <p>Access from anywhere, anytime.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-cogs feature-icon"></i>
+          <h4>Customizable</h4>
+          <p>Adaptable to your workflow.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-chart-line feature-icon"></i>
+          <h4>Analytics</h4>
+          <p>Insightful reports to drive growth.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-users feature-icon"></i>
+          <h4>Collaboration</h4>
+          <p>Work together seamlessly.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-mobile-alt feature-icon"></i>
+          <h4>Mobile Friendly</h4>
+          <p>Fully responsive on all devices.</p>
+        </div>
       </div>
     </div>
   </section>

@@ -1,12 +1,21 @@
-/* ===========================
+/* =========================
    IIT-BBSR APP JS
 =========================== */
 
-// DARK MODE TOGGLE
+// DARK MODE TOGGLE with persistence
 const themeToggle = document.getElementById("themeToggle");
+if(localStorage.getItem("dark-mode") === "true"){
+  document.body.classList.add("dark-mode");
+  themeToggle.textContent = "☀️";
+} else {
+  document.body.classList.remove("dark-mode");
+  themeToggle.textContent = "🌙";
+}
 themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("theme-light");
-  themeToggle.textContent = document.body.classList.contains("theme-light") ? "🌙" : "☀️";
+  document.body.classList.toggle("dark-mode");
+  const isDark = document.body.classList.contains("dark-mode");
+  localStorage.setItem("dark-mode", isDark);
+  themeToggle.textContent = isDark ? "☀️" : "🌙";
 });
 
 // MOBILE NAV
@@ -14,68 +23,68 @@ const navToggle = document.getElementById("hamburger");
 const navMenu = document.getElementById("mainNav");
 navToggle.addEventListener("click", () => {
   navToggle.classList.toggle("open");
-  navMenu.classList.toggle("open");
+  navMenu.classList.toggle("show");
 });
 
 // TABS
 const tabs = document.querySelectorAll(".tab");
 const tabText = document.getElementById("tabText");
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
-    tabText.textContent = `${tab.dataset.tab.charAt(0).toUpperCase()+tab.dataset.tab.slice(1)} details will appear here.`;
-  });
-});
 
 // PRICING TOGGLE
 const priceToggle = document.getElementById("priceToggle");
-const prices = document.querySelectorAll(".price");
 priceToggle.addEventListener("change", () => {
-  prices.forEach(p => {
-    p.textContent = priceToggle.checked ? p.dataset.year : p.dataset.month;
+  document.querySelectorAll(".price").forEach(el => {
+    el.textContent = priceToggle.checked ? el.dataset.year : el.dataset.month;
   });
 });
 
-// TESTIMONIAL CAROUSEL
-const testimonials = document.querySelectorAll(".testimonial");
-let currentTestimonial = 0;
-setInterval(() => {
-  testimonials[currentTestimonial].classList.remove("active");
-  currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-  testimonials[currentTestimonial].classList.add("active");
-}, 5000);
-
-// SCROLL TO TOP
+// SCROLL TO TOP BUTTON
 const scrollTopBtn = document.getElementById("scrollTop");
 window.addEventListener("scroll", () => {
-  scrollTopBtn.style.display = window.scrollY > 400 ? "block" : "none";
+  scrollTopBtn.style.display = window.scrollY > 500 ? "block" : "none";
 });
-scrollTopBtn.addEventListener("click", () => {
-  window.scrollTo({top:0, behavior:"smooth"});
-});
+scrollTopBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:'smooth'}));
 
-// CONTACT FORM
-const contactForm = document.getElementById("contactForm");
-const formStatus = document.getElementById("formStatus");
-contactForm.addEventListener("submit", e => {
-  e.preventDefault();
-  formStatus.textContent = "Message sent!";
-  contactForm.reset();
-  setTimeout(()=>formStatus.textContent="",3000);
+// PRELOADER
+window.addEventListener("load", () => {
+  document.getElementById("preloader").style.display = "none";
 });
 
 // CUSTOM CURSOR
 const cursorDot = document.getElementById("cursor-dot");
 const cursorOutline = document.getElementById("cursor-outline");
 document.addEventListener("mousemove", e => {
-  cursorDot.style.left = e.clientX + "px";
-  cursorDot.style.top = e.clientY + "px";
-  cursorOutline.style.left = e.clientX + "px";
-  cursorOutline.style.top = e.clientY + "px";
+  cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  cursorOutline.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
 });
-document.addEventListener("mousedown",()=>cursorOutline.style.transform="scale(0.7)");
-document.addEventListener("mouseup",()=>cursorOutline.style.transform="scale(1)");
 
-// PRELOADER
-window.addEventListener("load",()=>{document.getElementById("preloader").style.display="none"});
+// HERO PARALLAX
+document.addEventListener("scroll", () => {
+  const heroTitle = document.querySelector(".hero-title");
+  if(heroTitle){
+    heroTitle.style.transform = `translateY(${window.scrollY * 0.2}px)`;
+  }
+});
+
+// CONTACT FORM (dummy)
+const contactForm = document.getElementById("contactForm");
+contactForm.addEventListener("submit", e => {
+  e.preventDefault();
+  document.getElementById("formStatus").textContent = "Message sent!";
+  contactForm.reset();
+});
+
+// TESTIMONIAL CAROUSEL
+let testimonialIndex = 0;
+const testimonials = document.querySelectorAll(".testimonial");
+setInterval(() => {
+  testimonials.forEach(t => t.classList.remove("active"));
+  testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+  testimonials[testimonialIndex].classList.add("active");
+}, 4000);
+
+// BACK TO HOME NAV
+document.getElementById("homeBtn").addEventListener("click", e => {
+  e.preventDefault();
+  window.scrollTo({top:0, behavior:"smooth"});
+});
