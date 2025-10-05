@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,3 +11,115 @@
 
 </body>
 </html>
+
+
+
+ -->
+
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechZephyr - LiveStockClassify</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">TechZephyr App</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="darkModeToggle">🌙</button>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <video autoplay muted loop id="heroVideo">
+      <source src="assets/banner.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <h1>Share Quality Time. And Space.</h1>
+      <p>Experience innovation with IIT BBSR App.</p>
+      <a href="#pricing" class="btn">Start Free Trial</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <h2>Our Features</h2>
+    <div class="tabs">
+      <button class="tab active" data-tab="billing">Billing</button>
+      <button class="tab" data-tab="charging">Charging</button>
+      <button class="tab" data-tab="catalog">Catalog</button>
+      <button class="tab" data-tab="events">Events</button>
+    </div>
+    <div class="tab-content">
+      <p id="tabText">Billing details will appear here...</p>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing">
+    <h2>Pricing Plans</h2>
+    <label>
+      <input type="checkbox" id="priceToggle"> Bill Annually
+    </label>
+    <div class="pricing-cards">
+      <div class="card">
+        <h3>Growth</h3>
+        <p class="price">$29 / mo</p>
+        <button>Add to Bag</button>
+      </div>
+      <div class="card popular">
+        <h3>Pro <span class="badge">Most Popular</span></h3>
+        <p class="price">$59 / mo</p>
+        <button>Add to Bag</button>
+      </div>
+      <div class="card">
+        <h3>Enterprise</h3>
+        <p class="price">$99 / mo</p>
+        <button>Add to Bag</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="testimonials">
+    <h2>Happy Sellers</h2>
+    <div class="carousel">
+      <div class="testimonial active">"Amazing app!" - Amzigo (UK)</div>
+      <div class="testimonial">"Simplifies my work!" - Xero (IN)</div>
+      <div class="testimonial">"Highly recommended!" - Capterra (US)</div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 TechZephyr APP- LiveStockClassify. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
