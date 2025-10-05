@@ -359,3 +359,50 @@ body.dark-mode .feature-card { background: rgba(255,255,255,0.05); }
   .section { padding: 3rem 1rem; }
   .card-plan { width: 90%; }
 }
+
+
+.card-plan .price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--price-color); /* use variable */
+  margin: 1rem 0;
+  transition: color 0.3s ease;
+}
+
+/* =========================
+   PRICING CARDS
+========================= */
+.card-plan {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
+}
+
+body.dark-mode .card-plan {
+  background: #1e293b; /* darker card background in dark mode */
+  color: #f9f9f9; /* text color in dark mode */
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f1724; /* default dark text */
+}
+
+body.dark-mode .price {
+  color: #facc15; /* bright yellow for dark mode, visible on dark bg */
+}
+
+/* Other text inside card */
+.card-plan h3, .card-plan .plan-features li {
+  transition: color 0.3s;
+}
+
+body.dark-mode .card-plan h3,
+body.dark-mode .card-plan .plan-features li {
+  color: #f9f9f9;
+}
