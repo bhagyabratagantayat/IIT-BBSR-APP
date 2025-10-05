@@ -3,31 +3,46 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>IIT BBSR App — TechZephyr Round 1</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>IIT-BBSR App — TechZephyr</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/9d6f3f9d2e.js" crossorigin="anonymous"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Meta for theme -->
+  <meta name="theme-color" content="#0f1724" />
 </head>
 <body>
 
-  <!-- PRELOADER -->
-  <div id="preloader" aria-hidden="false">
+  <!-- Preloader -->
+  <div id="preloader" aria-hidden="true">
     <div class="loader">
       <svg viewBox="0 0 100 100" width="80" height="80" aria-hidden="true">
-        <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="g" x1="0" x2="1">
+            <stop offset="0%" stop-color="#FF7A00" />
+            <stop offset="100%" stop-color="#7C3AED" />
+          </linearGradient>
+        </defs>
+        <path d="M50 15 a35 35 0 1 1 0 70 a35 35 0 1 1 0 -70" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round" />
       </svg>
-      <div class="loader-text">Loading…</div>
+      <div class="loader-text">Loading — IIT BBSR</div>
     </div>
   </div>
 
   <!-- NAVBAR -->
-  <header class="navbar" role="banner">
+  <header class="navbar" id="navbar">
     <div class="container nav-inner">
-      <a class="logo" href="#hero">IIT-BBSR</a>
+      <a class="brand" href="#hero" aria-label="IIT BBSR Home">IIT BBSR</a>
 
-      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
-        ☰
+      <button id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation" class="nav-toggle">
+        <span class="hamburger"></span>
       </button>
 
-      <nav id="primaryNav" class="nav" role="navigation" aria-label="Primary">
+      <nav id="navMenu" class="nav-menu" role="navigation">
         <ul class="nav-links">
           <li><a href="#hero">Home</a></li>
           <li><a href="#features">Features</a></li>
@@ -37,133 +52,189 @@
         </ul>
       </nav>
 
-      <div class="controls">
+      <div class="nav-actions">
         <button id="darkModeToggle" aria-pressed="false" title="Toggle dark mode">🌙</button>
       </div>
     </div>
   </header>
 
-  <!-- HERO (video background + parallax text) -->
-  <section id="hero" class="hero" aria-labelledby="hero-title">
-    <video id="heroVideo" class="hero-video" autoplay muted loop playsinline>
-      <source src="assets/banner.mp4" type="video/mp4" />
-    </video>
-
-    <div class="container hero-content">
-      <h1 id="hero-title" class="parallax" data-speed="0.6">Share quality time. And space.</h1>
-      <p class="lead parallax" data-speed="0.8">Experience the replication challenge — pixel-perfect design with subtle innovation.</p>
-      <div class="hero-cta parallax" data-speed="1.0">
-        <a class="btn" href="#pricing">Start 14-day free trial</a>
-        <a class="btn ghost" href="#features">See features</a>
+  <!-- HERO WITH VIDEO + PARALLAX TEXT -->
+  <main>
+    <section id="hero" class="hero">
+      <!-- soft overlay + background video -->
+      <div class="hero-media">
+        <video id="heroVideo" class="bg-video" autoplay muted loop playsinline>
+          <source src="https://cdn.coverr.co/videos/coverr-silhouette-of-person-in-a-cafe-1629?token=eyJhbGciOiJIUzI1NiJ9.eyJ0eXAiOiJKV1QiLCJleHAiOjE5OTk5OTk5OTksImlhdCI6MTY5NjY2NjY2Nn0.XXXXX" type="video/mp4">
+          <!-- fallback image -->
+          <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=1920&auto=format&fit=crop" alt="Hero background" />
+        </video>
+        <div class="hero-overlay"></div>
       </div>
 
-      <div class="widgets" aria-hidden="true">
-        <!-- small circular widgets placeholder -->
-        <div class="widget w1">4.8<span>★</span></div>
-        <div class="widget w2">Xero</div>
-        <div class="widget w3">Capterra</div>
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h1 class="hero-title" data-parallax>Share quality time. <span class="accent">And space.</span></h1>
+          <p class="hero-sub">Make user experiences delightful with pixel-perfect design and subtle, meaningful interactions.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#pricing">Start 14-day free trial</a>
+            <a class="btn btn-ghost" href="#features">See features</a>
+          </div>
+
+          <div class="widget-row" aria-hidden="true">
+            <div class="widget widget-1">
+              <div class="w-title">4.8</div>
+              <div class="w-sub">Rating on Capterra</div>
+            </div>
+            <div class="widget widget-2">
+              <div class="w-title">1K+</div>
+              <div class="w-sub">Trusted Sellers</div>
+            </div>
+            <div class="widget widget-3">
+              <div class="w-title">99.9%</div>
+              <div class="w-sub">Uptime</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right" aria-hidden="true">
+          <!-- a quick card mock showing product/banners using remote images -->
+          <div class="card-graphic">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" alt="Product preview">
+            <div class="card-badge">MOST POPULAR</div>
+            <div class="card-info">
+              <h4>Growth Plan</h4>
+              <p>Perfect for fast growing sellers</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FEATURES (tabs) -->
-  <section id="features" class="features container" aria-labelledby="features-title">
-    <h2 id="features-title">Our Features</h2>
+    <!-- FEATURES / TABS -->
+    <section id="features" class="features section">
+      <div class="container">
+        <h2 class="section-title">Our Features</h2>
 
-    <div class="tabs" role="tablist" aria-label="Feature categories">
-      <button class="tab active" role="tab" aria-selected="true" data-tab="billing">Billing</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="charging">Charging</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="catalog">Catalog</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="events">Events</button>
-    </div>
+        <div class="tabs" role="tablist" aria-label="Feature tabs">
+          <button class="tab active" role="tab" aria-selected="true" data-tab="billing">Billing</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="charging">Charging</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="catalog">Catalog</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="events">Events</button>
+        </div>
 
-    <div class="tab-panel" id="tabPanel" role="tabpanel">
-      <div id="tabContent" class="tab-content">
-        <p><strong>Billing</strong> — replicate the billing UI, with invoices, subtotals and a mini chart (placeholder).</p>
+        <div class="tab-panel" id="tabPanel" role="tabpanel">
+          <div class="tab-content">
+            <p id="tabText">Billing details will appear here. Replace with the actual content and visuals from Drive assets.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PRICING -->
-  <section id="pricing" class="pricing container" aria-labelledby="pricing-title">
-    <h2 id="pricing-title">Pricing Plans</h2>
-    <div class="price-toggle">
-      <label for="billingCycle">Annually</label>
-      <input id="billingCycle" type="checkbox" aria-label="Toggle annual pricing" />
-      <label for="billingCycle">Monthly</label>
-    </div>
+    <!-- PRICING -->
+    <section id="pricing" class="pricing section">
+      <div class="container">
+        <div class="pricing-header">
+          <h2 class="section-title">Pricing Plans</h2>
+          <div class="toggle-wrap">
+            <label class="switch">
+              <input id="priceToggle" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+            <span class="toggle-label">Bill Annually</span>
+          </div>
+        </div>
 
-    <div class="pricing-grid" role="list">
-      <article class="card" role="listitem" aria-labelledby="plan-growth">
-        <h3 id="plan-growth">Growth</h3>
-        <p class="price" data-month="$29 / mo" data-year="$299 / yr">$29 / mo</p>
-        <ul class="features-list">
-          <li>Up to 5 users</li>
-          <li>Email support</li>
-        </ul>
-        <button class="btn">Add to Bag</button>
-      </article>
+        <div class="pricing-cards">
+          <article class="card plan">
+            <h3>Growth</h3>
+            <div class="price" data-month="$29 / mo" data-year="$299 / yr">$29 / mo</div>
+            <ul class="plan-features">
+              <li>10k listings</li>
+              <li>Email support</li>
+              <li>Analytics dashboard</li>
+            </ul>
+            <button class="btn btn-primary">Add to Bag</button>
+          </article>
 
-      <article class="card popular" role="listitem" aria-labelledby="plan-pro">
-        <h3 id="plan-pro">Pro <span class="badge">Most Popular</span></h3>
-        <p class="price" data-month="$59 / mo" data-year="$599 / yr">$59 / mo</p>
-        <ul class="features-list">
-          <li>Up to 20 users</li>
-          <li>Priority support</li>
-        </ul>
-        <button class="btn">Add to Bag</button>
-      </article>
+          <article class="card plan popular">
+            <div class="popular-label">MOST POPULAR</div>
+            <h3>Pro</h3>
+            <div class="price" data-month="$59 / mo" data-year="$599 / yr">$59 / mo</div>
+            <ul class="plan-features">
+              <li>50k listings</li>
+              <li>Priority support</li>
+              <li>Advanced reporting</li>
+            </ul>
+            <button class="btn btn-primary">Add to Bag</button>
+          </article>
 
-      <article class="card" role="listitem" aria-labelledby="plan-enterprise">
-        <h3 id="plan-enterprise">Enterprise</h3>
-        <p class="price" data-month="$99 / mo" data-year="$999 / yr">$99 / mo</p>
-        <ul class="features-list">
-          <li>Unlimited users</li>
-          <li>Dedicated support</li>
-        </ul>
-        <button class="btn">Contact Sales</button>
-      </article>
-    </div>
-  </section>
+          <article class="card plan">
+            <h3>Enterprise</h3>
+            <div class="price" data-month="$99 / mo" data-year="$999 / yr">$99 / mo</div>
+            <ul class="plan-features">
+              <li>Unlimited listings</li>
+              <li>Dedicated manager</li>
+              <li>Custom integrations</li>
+            </ul>
+            <button class="btn btn-primary">Contact Sales</button>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <!-- TESTIMONIALS (carousel) -->
-  <section id="testimonials" class="testimonials container" aria-labelledby="testimonials-title">
-    <h2 id="testimonials-title">Happy Sellers</h2>
-    <div class="carousel" aria-live="polite">
-      <blockquote class="testimonial active">"Amazing app!" <cite>— Amzigo, UK</cite></blockquote>
-      <blockquote class="testimonial">"Simplifies my work!" <cite>— Seller X, IN</cite></blockquote>
-      <blockquote class="testimonial">"Highly recommended!" <cite>— Capterra, US</cite></blockquote>
-    </div>
-  </section>
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials section">
+      <div class="container">
+        <h2 class="section-title">Happy Sellers</h2>
 
-  <!-- CONTACT -->
-  <section id="contact" class="contact container" aria-labelledby="contact-title">
-    <h2 id="contact-title">Contact Us</h2>
-    <form id="contactForm" class="contact-form" novalidate>
-      <label>
-        <span class="visually-hidden">Name</span>
-        <input name="name" type="text" placeholder="Your name" required aria-required="true" />
-      </label>
-      <label>
-        <span class="visually-hidden">Email</span>
-        <input name="email" type="email" placeholder="Your email" required aria-required="true" />
-      </label>
-      <label>
-        <span class="visually-hidden">Message</span>
-        <textarea name="message" placeholder="Your message" rows="4" required aria-required="true"></textarea>
-      </label>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-  </section>
+        <div class="carousel" aria-roledescription="carousel" aria-live="polite">
+          <div class="testimonial active" tabindex="0">
+            <blockquote>"Amazing app — reduced my listing time by 80%!"</blockquote>
+            <cite>— Amzigo, UK Seller</cite>
+          </div>
+          <div class="testimonial" tabindex="0">
+            <blockquote>"The analytics are spot on and actionable."</blockquote>
+            <cite>— Xero Store, IN</cite>
+          </div>
+          <div class="testimonial" tabindex="0">
+            <blockquote>"Solid uptime and fantastic support."</blockquote>
+            <cite>— Capterra Reviewer</cite>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact section">
+      <div class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <form id="contactForm" class="contact-form" aria-label="Contact form">
+          <div class="row">
+            <input type="text" id="name" name="name" placeholder="Your Name" required />
+            <input type="email" id="email" name="email" placeholder="Your Email" required />
+          </div>
+          <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <span id="formStatus" role="status" aria-live="polite"></span>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
 
   <!-- FOOTER -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container">
-      <p>© 2025 IIT BBSR App. All rights reserved.</p>
-      <p class="muted">Built for TechZephyr ROUND 1 — Replicate & Innovate</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2025 IIT BBSR App. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#" rel="noopener">Privacy</a>
+        <a href="#" rel="noopener">Terms</a>
+      </div>
     </div>
   </footer>
 
-  <script src="script.js" defer></script>
+  <!-- Scripts -->
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,110 +1,149 @@
-/* --------------------------
-   Basic interactive behavior
-   --------------------------*/
+// ======== Utility / DOM =========
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-document.addEventListener('DOMContentLoaded', () => {
-  // PRELOADER: hide after window load + small delay
-  window.addEventListener('load', () => {
-    const pre = document.getElementById('preloader');
-    pre.style.opacity = '0';
-    setTimeout(() => pre.style.display = 'none', 500);
-  });
+// PRELOADER
+const preloader = $('#preloader');
+window.addEventListener('load', () => {
+  // small delay to show loader elegantly
+  setTimeout(() => {
+    preloader.style.opacity = 0;
+    preloader.style.transform = 'translateY(-6px)';
+    setTimeout(()=> preloader.remove(), 420);
+  }, 450);
+});
 
-  // MOBILE NAV TOGGLE
-  const menuBtn = document.getElementById('menuBtn');
-  const nav = document.getElementById('primaryNav');
-  menuBtn.addEventListener('click', () => {
-    const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-    menuBtn.setAttribute('aria-expanded', String(!expanded));
-    nav.classList.toggle('show');
-  });
+/* NAV TOGGLE */
+const navToggle = $('#navToggle'), navMenu = $('#navMenu'), navLinks = $$('.nav-links a');
+navToggle?.addEventListener('click', () => {
+  const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+  navToggle.setAttribute('aria-expanded', String(!expanded));
+  navMenu.classList.toggle('open');
+  // show/hide links for small screens
+  document.querySelector('.nav-links')?.classList.toggle('open');
+});
 
-  // DARK MODE
-  const darkToggle = document.getElementById('darkModeToggle');
-  const lsKey = 'iits_bbsr_dark';
-  // initialize from localStorage
-  if (localStorage.getItem(lsKey) === '1') document.body.classList.add('dark');
-  darkToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    const isDark = document.body.classList.contains('dark');
-    localStorage.setItem(lsKey, isDark ? '1' : '0');
-    darkToggle.setAttribute('aria-pressed', String(isDark));
-  });
+/* Close nav after click on mobile */
+navLinks.forEach(a => a.addEventListener('click', () => {
+  document.querySelector('.nav-links')?.classList.remove('open');
+  navMenu.classList.remove('open');
+  navToggle.setAttribute('aria-expanded','false');
+}));
 
-  // TABS (Feature tabs)
-  const tabs = document.querySelectorAll('.tab');
-  const tabContent = document.getElementById('tabContent');
-  tabs.forEach(t => t.addEventListener('click', (e) => {
-    tabs.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected','false'); });
-    e.currentTarget.classList.add('active');
-    e.currentTarget.setAttribute('aria-selected','true');
+/* DARK MODE TOGGLE (persist) */
+const darkToggle = $('#darkModeToggle');
+const preferred = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'dark');
+function applyTheme(t){
+  if(t === 'dark') {
+    document.documentElement.style.setProperty('--bg','#071026');
+    document.body.classList.add('dark');
+    darkToggle.textContent = '☀️';
+    darkToggle.setAttribute('aria-pressed','true');
+  } else {
+    document.body.classList.remove('dark');
+    darkToggle.textContent = '🌙';
+    darkToggle.setAttribute('aria-pressed','false');
+  }
+  localStorage.setItem('theme', t);
+}
+applyTheme(preferred);
+darkToggle.addEventListener('click', () => {
+  const isDark = document.body.classList.contains('dark');
+  applyTheme(isDark ? 'light' : 'dark');
+});
 
-    const key = e.currentTarget.dataset.tab;
-    // basic content swap examples; you can replace with richer markup
+/* Tabs */
+const tabs = $$('.tab'), tabText = $('#tabText');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false') });
+    tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+    // simple simulated content switch
+    const key = tab.getAttribute('data-tab');
     const map = {
-      billing: '<h3>Billing</h3><p>Invoices, line-items, mini chart preview.</p>',
-      charging: '<h3>Charging</h3><p>Charge flows, card management and receipts.</p>',
-      catalog: '<h3>Catalog</h3><p>Product listing, filters and brand kits.</p>',
-      events: '<h3>Events</h3><p>Event triggers and webhooks.</p>'
+      billing: 'Fast, automated billing with invoice generation and reconciliations.',
+      charging: 'Smart charging and settlement system with auto-retries and refunds.',
+      catalog: 'Organize products with tags, variants, and bulk-editing tools.',
+      events: 'Track campaigns, promotions, and scheduled product drops.'
     };
-    tabContent.innerHTML = map[key] || '<p>Details coming soon.</p>';
-  }));
-
-  // PRICING toggle (monthly/yearly)
-  const billingCycle = document.getElementById('billingCycle');
-  const priceEls = document.querySelectorAll('.price');
-  billingCycle.addEventListener('change', () => {
-    priceEls.forEach(pe => {
-      const month = pe.dataset.month;
-      const year = pe.dataset.year;
-      pe.textContent = billingCycle.checked ? year : month;
-    });
+    // 3D flip effect
+    const panel = document.querySelector('.tab-panel .tab-content');
+    panel.animate([{transform:'rotateX(0deg)', opacity:1},{transform:'rotateX(12deg)', opacity:.3},{transform:'rotateX(0deg)', opacity:1}], {duration:450, easing:'ease'});
+    tabText.textContent = map[key] || 'Details will appear here...';
   });
+});
 
-  // TESTIMONIAL CAROUSEL (simple)
-  const testimonials = Array.from(document.querySelectorAll('.testimonial'));
-  let tIdx = 0;
-  setInterval(() => {
-    testimonials.forEach((t, i) => t.classList.remove('active'));
-    tIdx = (tIdx + 1) % testimonials.length;
-    testimonials[tIdx].classList.add('active');
-  }, 3500);
+/* Pricing toggle */
+const priceToggle = $('#priceToggle');
+const priceEls = $$('.price');
+priceToggle.addEventListener('change', () => {
+  priceEls.forEach(el => {
+    el.textContent = priceToggle.checked ? el.dataset.year : el.dataset.month;
+  });
+});
 
-  // CONTACT FORM simple validation + success
-  const form = document.getElementById('contactForm');
-  form.addEventListener('submit', (ev) => {
-    ev.preventDefault();
-    const data = new FormData(form);
-    // trivial validation
-    if (!data.get('name') || !data.get('email') || !data.get('message')) {
-      alert('Please fill all fields.');
-      return;
-    }
-    // For hackathon: you can integrate Formspree or similar if you want POST
-    alert('Message sent — thank you!');
+/* Testimonials carousel */
+let tIndex = 0;
+const testimonials = $$('.testimonial');
+function rotateTestimonials(){
+  testimonials.forEach((t, i) => t.classList.toggle('active', i === tIndex));
+}
+rotateTestimonials();
+setInterval(() => {
+  tIndex = (tIndex + 1) % testimonials.length;
+  rotateTestimonials();
+}, 3500);
+
+/* Contact form - basic front-end simulation */
+const form = $('#contactForm'), formStatus = $('#formStatus');
+form?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  formStatus.textContent = 'Sending…';
+  // simulate async send
+  setTimeout(()=> {
+    formStatus.textContent = 'Message sent. Thank you!';
     form.reset();
+    setTimeout(()=> formStatus.textContent = '', 3000);
+  }, 900);
+});
+
+/* Intersection Observer for fade-in elements */
+const fadeEls = $$('.fade-in, .widget, .card-graphic, .testimonial, .section-title, .hero-left, .hero-right');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
   });
+}, { threshold: 0.15 });
 
-  // PARALLAX: simple speed based on data-speed attribute
-  const parallaxEls = document.querySelectorAll('.parallax');
-  window.addEventListener('scroll', () => {
-    const scTop = window.scrollY;
-    parallaxEls.forEach(el => {
-      const speed = parseFloat(el.dataset.speed || '1');
-      el.style.transform = `translateY(${scTop * (0.05 * (1 - speed))}px)`;
-    });
-  }, {passive:true});
+fadeEls.forEach(el => io.observe(el));
 
-  // Accessibility: allow keyboard for tabs
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-      const active = document.querySelector('.tab.active');
-      let next;
-      if (e.key === 'ArrowRight') next = active.nextElementSibling || tabs[0];
-      else next = active.previousElementSibling || tabs[tabs.length - 1];
-      next.click();
-      next.focus();
-    }
+/* Parallax for hero title */
+const heroTitle = document.querySelector('.hero-title[data-parallax]');
+window.addEventListener('scroll', () => {
+  if(!heroTitle) return;
+  const y = window.scrollY;
+  const offset = Math.min(Math.max(y / 6, 0), 60);
+  heroTitle.style.transform = `translateY(${offset}px)`;
+});
+
+/* Lazy loading for images already via loading="lazy" in HTML; ensure videos are muted & willplay */
+const heroVideo = document.getElementById('heroVideo');
+if(heroVideo) {
+  heroVideo.addEventListener('error', () => {
+    // fallback: hide video if fails to load
+    heroVideo.style.display = 'none';
   });
+}
 
+/* Accessibility: keyboard navigation for carousel testimonials */
+testimonials.forEach((t, i) => {
+  t.addEventListener('focus', () => { tIndex = i; rotateTestimonials(); });
+});
+
+/* Small UI polish: make price buttons show active on click */
+document.querySelectorAll('.card.plan button').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    btn.textContent = btn.textContent.includes('Add') ? 'Added ✓' : btn.textContent;
+    setTimeout(()=> btn.textContent = btn.textContent.includes('Added') ? btn.textContent.replace('Added ✓','Add to Bag') : btn.textContent, 1400);
+  });
 });
