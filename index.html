@@ -2,239 +2,203 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IIT-BBSR App — TechZephyr</title>
 
   <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/9d6f3f9d2e.js" crossorigin="anonymous"></script>
 
-  <!-- Styles -->
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Meta for theme -->
+  <!-- Theme Meta -->
   <meta name="theme-color" content="#0f1724" />
 </head>
 <body>
 
   <!-- Preloader -->
-  <div id="preloader" aria-hidden="true">
-    <div class="loader">
-      <svg viewBox="0 0 100 100" width="80" height="80" aria-hidden="true">
-        <defs>
-          <linearGradient id="g" x1="0" x2="1">
-            <stop offset="0%" stop-color="#FF7A00" />
-            <stop offset="100%" stop-color="#7C3AED" />
-          </linearGradient>
-        </defs>
-        <path d="M50 15 a35 35 0 1 1 0 70 a35 35 0 1 1 0 -70" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round" />
-      </svg>
-      <div class="loader-text">Loading — IIT BBSR</div>
-    </div>
+  <div id="preloader" class="preloader">
+    <div class="preloader-ring"></div>
   </div>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-outline" class="cursor-outline"></div>
 
   <!-- NAVBAR -->
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
-      <a class="brand" href="#hero" aria-label="IIT BBSR Home">IIT BBSR</a>
+      <a class="brand" href="#hero" id="homeBtn">IIT BBSR</a>
 
-      <button id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation" class="nav-toggle">
+      <button id="hamburger" class="nav-toggle" aria-label="Toggle navigation">
         <span class="hamburger"></span>
       </button>
 
-      <nav id="navMenu" class="nav-menu" role="navigation">
+      <nav id="mainNav" class="nav-menu">
         <ul class="nav-links">
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a class="nav-link" href="#hero">Home</a></li>
+          <li><a class="nav-link" href="#features">Features</a></li>
+          <li><a class="nav-link" href="#pricing">Pricing</a></li>
+          <li><a class="nav-link" href="#testimonials">Testimonials</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
       </nav>
 
-      <div class="nav-actions">
-        <button id="darkModeToggle" aria-pressed="false" title="Toggle dark mode">🌙</button>
-      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
     </div>
   </header>
 
-  <!-- HERO WITH VIDEO + PARALLAX TEXT -->
-  <main>
-    <section id="hero" class="hero">
-      <!-- soft overlay + background video -->
-      <div class="hero-media">
-        <video id="heroVideo" class="bg-video" autoplay muted loop playsinline>
-          <source src="https://cdn.coverr.co/videos/coverr-silhouette-of-person-in-a-cafe-1629?token=eyJhbGciOiJIUzI1NiJ9.eyJ0eXAiOiJKV1QiLCJleHAiOjE5OTk5OTk5OTksImlhdCI6MTY5NjY2NjY2Nn0.XXXXX" type="video/mp4">
-          <!-- fallback image -->
-          <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=1920&auto=format&fit=crop" alt="Hero background" />
-        </video>
-        <div class="hero-overlay"></div>
-      </div>
-
-      <div class="container hero-inner">
-        <div class="hero-left">
-          <h1 class="hero-title" data-parallax>Share quality time. <span class="accent">And space.</span></h1>
-          <p class="hero-sub">Make user experiences delightful with pixel-perfect design and subtle, meaningful interactions.</p>
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href="#pricing">Start 14-day free trial</a>
-            <a class="btn btn-ghost" href="#features">See features</a>
-          </div>
-
-          <div class="widget-row" aria-hidden="true">
-            <div class="widget widget-1">
-              <div class="w-title">4.8</div>
-              <div class="w-sub">Rating on Capterra</div>
-            </div>
-            <div class="widget widget-2">
-              <div class="w-title">1K+</div>
-              <div class="w-sub">Trusted Sellers</div>
-            </div>
-            <div class="widget widget-3">
-              <div class="w-title">99.9%</div>
-              <div class="w-sub">Uptime</div>
-            </div>
-          </div>
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero section--hero">
+    <div class="hero-video-wrapper">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="https://cdn.coverr.co/videos/coverr-silhouette-of-person-in-a-cafe-1629?token=eyJhbGciOiJIUzI1NiJ9.XXXXX" type="video/mp4">
+        <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=1920&auto=format&fit=crop" alt="Hero background">
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-left fade-up">
+        <h1 class="hero-title" data-parallax>Share quality time. <span class="accent">And space.</span></h1>
+        <p class="hero-sub">Make user experiences delightful with pixel-perfect design and subtle, meaningful interactions.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#pricing">Start 14-day free trial</a>
+          <a class="btn btn-ghost" href="#features">See features</a>
         </div>
-
-        <div class="hero-right" aria-hidden="true">
-          <!-- a quick card mock showing product/banners using remote images -->
-          <div class="card-graphic">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" alt="Product preview">
-            <div class="card-badge">MOST POPULAR</div>
-            <div class="card-info">
-              <h4>Growth Plan</h4>
-              <p>Perfect for fast growing sellers</p>
-            </div>
+      </div>
+      <div class="hero-right fade-up" aria-hidden="true">
+        <div class="card-graphic glass-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" alt="Product preview">
+          <div class="badge">MOST POPULAR</div>
+          <div class="card-body">
+            <h4>Growth Plan</h4>
+            <p>Perfect for fast growing sellers</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FEATURES / TABS -->
-    <section id="features" class="features section">
-      <div class="container">
-        <h2 class="section-title">Our Features</h2>
+  <!-- FEATURES SECTION -->
+  <section id="features" class="features section">
+    <div class="container">
+      <h2 class="section-title">Our Features</h2>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="billing">Billing</button>
+        <button class="tab" data-tab="charging">Charging</button>
+        <button class="tab" data-tab="catalog">Catalog</button>
+        <button class="tab" data-tab="events">Events</button>
+      </div>
+      <div class="tab-panel" id="tabPanel">
+        <p id="tabText">Billing details will appear here. Replace with actual content.</p>
+      </div>
+    </div>
+  </section>
 
-        <div class="tabs" role="tablist" aria-label="Feature tabs">
-          <button class="tab active" role="tab" aria-selected="true" data-tab="billing">Billing</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="charging">Charging</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="catalog">Catalog</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="events">Events</button>
-        </div>
-
-        <div class="tab-panel" id="tabPanel" role="tabpanel">
-          <div class="tab-content">
-            <p id="tabText">Billing details will appear here. Replace with the actual content and visuals from Drive assets.</p>
-          </div>
+  <!-- PRICING SECTION -->
+  <section id="pricing" class="pricing section">
+    <div class="container">
+      <div class="pricing-header">
+        <h2 class="section-title">Pricing Plans</h2>
+        <div class="toggle-wrap">
+          <label class="switch">
+            <input id="priceToggle" type="checkbox" />
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-label">Bill Annually</span>
         </div>
       </div>
-    </section>
-
-    <!-- PRICING -->
-    <section id="pricing" class="pricing section">
-      <div class="container">
-        <div class="pricing-header">
-          <h2 class="section-title">Pricing Plans</h2>
-          <div class="toggle-wrap">
-            <label class="switch">
-              <input id="priceToggle" type="checkbox" />
-              <span class="slider"></span>
-            </label>
-            <span class="toggle-label">Bill Annually</span>
-          </div>
-        </div>
-
-        <div class="pricing-cards">
-          <article class="card plan">
-            <h3>Growth</h3>
-            <div class="price" data-month="$29 / mo" data-year="$299 / yr">$29 / mo</div>
-            <ul class="plan-features">
-              <li>10k listings</li>
-              <li>Email support</li>
-              <li>Analytics dashboard</li>
-            </ul>
-            <button class="btn btn-primary">Add to Bag</button>
-          </article>
-
-          <article class="card plan popular">
-            <div class="popular-label">MOST POPULAR</div>
-            <h3>Pro</h3>
-            <div class="price" data-month="$59 / mo" data-year="$599 / yr">$59 / mo</div>
-            <ul class="plan-features">
-              <li>50k listings</li>
-              <li>Priority support</li>
-              <li>Advanced reporting</li>
-            </ul>
-            <button class="btn btn-primary">Add to Bag</button>
-          </article>
-
-          <article class="card plan">
-            <h3>Enterprise</h3>
-            <div class="price" data-month="$99 / mo" data-year="$999 / yr">$99 / mo</div>
-            <ul class="plan-features">
-              <li>Unlimited listings</li>
-              <li>Dedicated manager</li>
-              <li>Custom integrations</li>
-            </ul>
-            <button class="btn btn-primary">Contact Sales</button>
-          </article>
-        </div>
+      <div class="pricing-cards">
+        <article class="card-plan plan">
+          <h3>Growth</h3>
+          <div class="price" data-month="$29 / mo" data-year="$299 / yr">$29 / mo</div>
+          <ul class="plan-features">
+            <li>10k listings</li>
+            <li>Email support</li>
+            <li>Analytics dashboard</li>
+          </ul>
+          <button class="btn btn-primary">Add to Bag</button>
+        </article>
+        <article class="card-plan plan popular">
+          <div class="popular-chip">MOST POPULAR</div>
+          <h3>Pro</h3>
+          <div class="price" data-month="$59 / mo" data-year="$599 / yr">$59 / mo</div>
+          <ul class="plan-features">
+            <li>50k listings</li>
+            <li>Priority support</li>
+            <li>Advanced reporting</li>
+          </ul>
+          <button class="btn btn-primary">Add to Bag</button>
+        </article>
+        <article class="card-plan plan">
+          <h3>Enterprise</h3>
+          <div class="price" data-month="$99 / mo" data-year="$999 / yr">$99 / mo</div>
+          <ul class="plan-features">
+            <li>Unlimited listings</li>
+            <li>Dedicated manager</li>
+            <li>Custom integrations</li>
+          </ul>
+          <button class="btn btn-primary">Contact Sales</button>
+        </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Testimonials -->
-    <section id="testimonials" class="testimonials section">
-      <div class="container">
-        <h2 class="section-title">Happy Sellers</h2>
-
-        <div class="carousel" aria-roledescription="carousel" aria-live="polite">
-          <div class="testimonial active" tabindex="0">
-            <blockquote>"Amazing app — reduced my listing time by 80%!"</blockquote>
-            <cite>— Amzigo, UK Seller</cite>
-          </div>
-          <div class="testimonial" tabindex="0">
-            <blockquote>"The analytics are spot on and actionable."</blockquote>
-            <cite>— Xero Store, IN</cite>
-          </div>
-          <div class="testimonial" tabindex="0">
-            <blockquote>"Solid uptime and fantastic support."</blockquote>
-            <cite>— Capterra Reviewer</cite>
-          </div>
+  <!-- TESTIMONIALS SECTION -->
+  <section id="testimonials" class="testimonials section">
+    <div class="container">
+      <h2 class="section-title">Happy Sellers</h2>
+      <div class="carousel">
+        <div class="testimonial active">
+          <blockquote>"Amazing app — reduced my listing time by 80%!"</blockquote>
+          <cite>— Amzigo, UK Seller</cite>
+        </div>
+        <div class="testimonial">
+          <blockquote>"The analytics are spot on and actionable."</blockquote>
+          <cite>— Xero Store, IN</cite>
+        </div>
+        <div class="testimonial">
+          <blockquote>"Solid uptime and fantastic support."</blockquote>
+          <cite>— Capterra Reviewer</cite>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Contact -->
-    <section id="contact" class="contact section">
-      <div class="container">
-        <h2 class="section-title">Contact Us</h2>
-        <form id="contactForm" class="contact-form" aria-label="Contact form">
-          <div class="row">
-            <input type="text" id="name" name="name" placeholder="Your Name" required />
-            <input type="email" id="email" name="email" placeholder="Your Email" required />
-          </div>
-          <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Send Message</button>
-            <span id="formStatus" role="status" aria-live="polite"></span>
-          </div>
-        </form>
-      </div>
-    </section>
-  </main>
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact section">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <form id="contactForm" class="contact-form">
+        <div class="form-row">
+          <input type="text" id="name" name="name" placeholder="Your Name" required>
+          <input type="email" id="email" name="email" placeholder="Your Email" required>
+        </div>
+        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <span id="formStatus"></span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- SCROLL TO TOP -->
+  <button id="scrollTop" class="scroll-top">↑</button>
 
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>© 2025 IIT BBSR App. All rights reserved.</div>
       <div class="footer-links">
-        <a href="#" rel="noopener">Privacy</a>
-        <a href="#" rel="noopener">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- JS -->
   <script src="script.js"></script>
 </body>
 </html>
